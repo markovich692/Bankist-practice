@@ -64,7 +64,6 @@ const inputClosePin = document.querySelector('.form__input--pin');
 containerApp.style.opacity = 1;
 
 //Creates the username property on each of the accounts
-
 accounts.forEach(function (acc, i) {
   const names = acc.owner.toLowerCase().split(' ');
 
@@ -75,40 +74,45 @@ accounts.forEach(function (acc, i) {
     .join('');
 });
 
+FUNCTIONS;
+//Display movements function
+
+const displayMovements = function (acc) {
+  containerMovements.innerHTML = '';
+
+  acc.movements.forEach(function (mov, i) {
+    const movementsType = mov > 0 ? 'deposit' : 'withdrawal';
+
+    const html = `
+           <div class="movements__row">
+             <div class="movements__type movements__type--${movementsType}">${
+      i + 1
+    } ${movementsType}</div>
+  
+             <div class="movements__value">${mov}€</div>
+           </div>
+           `;
+
+    containerMovements.insertAdjacentHTML('afterBegin', html);
+  });
+};
+
 //USER LOGS IN
 
 btnLogin.addEventListener('click', function (e) {
   e.preventDefault();
-  const user = inputLoginUsername.value;
-  const pin = inputLoginPin.value;
+  const userInput = inputLoginUsername.value;
+  const pinInput = inputLoginPin.value;
+
+  accounts.forEach(function (acc) {
+    if (userInput === acc.username && pinInput === String(acc.pin)) {
+      displayMovements(acc);
+    }
+  });
 
   inputLoginUsername.value = '';
   inputLoginPin.value = '';
 });
-
-// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-
-// movements.forEach(function (mov, i) {
-//   const movementsType = mov > 0 ? 'deposit' : 'withdrawal';
-
-//   const html = `
-//          <div class="movements__row">
-//            <div class="movements__type movements__type--${movementsType}">${
-//     i + 1
-//   } ${movementsType}</div>
-
-//            <div class="movements__value">${mov}€</div>
-//          </div>
-//          `;
-
-//   containerMovements.insertAdjacentHTML('afterBegin', html);
-// });
-
-//Balance
-// labelBalance.textContent = '';
-// const accBalance = movements.reduce((acc, mov) => acc + mov, movements[0]);
-// console.log(accBalance);
-// labelBalance.textContent = `${accBalance}€`;
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
