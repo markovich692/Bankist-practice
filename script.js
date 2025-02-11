@@ -63,22 +63,23 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 containerApp.style.opacity = 1;
 
-const html = `<div class="movements">
-        <div class="movements__row">
-          <div class="movements__type movements__type--deposit">2 deposit</div>
-          <div class="movements__date">3 days ago</div>
-          <div class="movements__value">4 000€</div>
-        </div>
-        <div class="movements__row">
-          <div class="movements__type movements__type--withdrawal">
-            1 withdrawal
-          </div>
-          <div class="movements__date">24/01/2037</div>
-          <div class="movements__value">-378€</div>
-        </div>
-      </div>`;
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
-containerApp.insertAdjacentHTML('afterbegin', html);
+movements.forEach(function (mov, i) {
+  const movementsType = mov > 0 ? 'deposit' : 'withdrawal';
+
+  const html = `
+         <div class="movements__row">
+           <div class="movements__type movements__type--${movementsType}">${
+    i + 1
+  } ${movementsType}</div>
+           
+           <div class="movements__value">${mov}€</div>
+         </div>
+         `;
+
+  containerMovements.insertAdjacentHTML('afterBegin', html);
+});
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -89,7 +90,5 @@ const currencies = new Map([
   ['EUR', 'Euro'],
   ['GBP', 'Pound sterling'],
 ]);
-
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
