@@ -63,23 +63,52 @@ const inputClosePin = document.querySelector('.form__input--pin');
 
 containerApp.style.opacity = 1;
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+//Creates the username property on each of the accounts
 
-movements.forEach(function (mov, i) {
-  const movementsType = mov > 0 ? 'deposit' : 'withdrawal';
+accounts.forEach(function (acc, i) {
+  const names = acc.owner.toLowerCase().split(' ');
 
-  const html = `
-         <div class="movements__row">
-           <div class="movements__type movements__type--${movementsType}">${
-    i + 1
-  } ${movementsType}</div>
-           
-           <div class="movements__value">${mov}€</div>
-         </div>
-         `;
-
-  containerMovements.insertAdjacentHTML('afterBegin', html);
+  acc.username = names
+    .map(function (name) {
+      return name.slice(0, 1);
+    })
+    .join('');
 });
+
+//USER LOGS IN
+
+btnLogin.addEventListener('click', function (e) {
+  e.preventDefault();
+  const user = inputLoginUsername.value;
+  const pin = inputLoginPin.value;
+
+  inputLoginUsername.value = '';
+  inputLoginPin.value = '';
+});
+
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// movements.forEach(function (mov, i) {
+//   const movementsType = mov > 0 ? 'deposit' : 'withdrawal';
+
+//   const html = `
+//          <div class="movements__row">
+//            <div class="movements__type movements__type--${movementsType}">${
+//     i + 1
+//   } ${movementsType}</div>
+
+//            <div class="movements__value">${mov}€</div>
+//          </div>
+//          `;
+
+//   containerMovements.insertAdjacentHTML('afterBegin', html);
+// });
+
+//Balance
+// labelBalance.textContent = '';
+// const accBalance = movements.reduce((acc, mov) => acc + mov, movements[0]);
+// console.log(accBalance);
+// labelBalance.textContent = `${accBalance}€`;
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
