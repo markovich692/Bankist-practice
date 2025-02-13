@@ -105,7 +105,15 @@ const displayBalance = function (acc) {
   labelBalance.textContent = balance + '€';
 };
 
-//Display money IN
+//Display SumIn
+
+const displaySumIn = function (acc) {
+  const moneyIn = acc.movements
+    .filter(cur => cur > 0)
+    .reduce((acc, deposit) => acc + deposit, 0);
+
+  labelSumIn.textContent = moneyIn + '€';
+};
 
 //USER LOGS IN
 btnLogin.addEventListener('click', function (e) {
@@ -118,6 +126,8 @@ btnLogin.addEventListener('click', function (e) {
       displayMovements(acc);
 
       displayBalance(acc);
+
+      displayIn(acc);
     }
   });
 
