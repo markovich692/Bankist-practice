@@ -96,10 +96,16 @@ const displayMovements = function (acc) {
   });
 };
 
-//Calculate balance function
+//Display balance function
 const displayBalance = function (acc) {
-  acc.movements.reduce((acc, mov) => acc + mov, acc.movements[0]);
+  const balance = acc.movements.reduce(
+    (acc, mov) => acc + mov,
+    acc.movements[0]
+  );
+  labelBalance.textContent = balance + '€';
 };
+
+//Display money IN
 
 //USER LOGS IN
 btnLogin.addEventListener('click', function (e) {
@@ -110,6 +116,8 @@ btnLogin.addEventListener('click', function (e) {
   accounts.forEach(function (acc) {
     if (userInput === acc.username && pinInput === String(acc.pin)) {
       displayMovements(acc);
+
+      displayBalance(acc);
     }
   });
 
