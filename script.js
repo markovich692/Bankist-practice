@@ -74,9 +74,8 @@ accounts.forEach(function (acc, i) {
     .join('');
 });
 
-FUNCTIONS;
+//FUNCTIONS
 //Display movements function
-
 const displayMovements = function (acc) {
   containerMovements.innerHTML = '';
 
@@ -97,8 +96,12 @@ const displayMovements = function (acc) {
   });
 };
 
-//USER LOGS IN
+//Calculate balance function
+const displayBalance = function (acc) {
+  acc.movements.reduce((acc, mov) => acc + mov, acc.movements[0]);
+};
 
+//USER LOGS IN
 btnLogin.addEventListener('click', function (e) {
   e.preventDefault();
   const userInput = inputLoginUsername.value;
@@ -118,10 +121,10 @@ btnLogin.addEventListener('click', function (e) {
 /////////////////////////////////////////////////
 // LECTURES
 
-const currencies = new Map([
-  ['USD', 'United States dollar'],
-  ['EUR', 'Euro'],
-  ['GBP', 'Pound sterling'],
-]);
+// const currencies = new Map([
+//   ['USD', 'United States dollar'],
+//   ['EUR', 'Euro'],
+//   ['GBP', 'Pound sterling'],
+// ]);
 
 /////////////////////////////////////////////////
