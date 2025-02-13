@@ -106,13 +106,21 @@ const displayBalance = function (acc) {
 };
 
 //Display SumIn
-
 const displaySumIn = function (acc) {
   const moneyIn = acc.movements
     .filter(cur => cur > 0)
     .reduce((acc, deposit) => acc + deposit, 0);
 
   labelSumIn.textContent = moneyIn + '€';
+};
+
+//Display SumOut
+const displaySumOut = function (acc) {
+  const moneyOut = acc.movements
+    .filter(cur => cur < 0)
+    .reduce((acc, withdrawal) => acc + withdrawal, 0);
+
+  labelSumOut.textContent = Math.abs(moneyOut) + '€';
 };
 
 //USER LOGS IN
@@ -127,7 +135,9 @@ btnLogin.addEventListener('click', function (e) {
 
       displayBalance(acc);
 
-      displayIn(acc);
+      displaySumIn(acc);
+
+      displaySumOut(acc);
     }
   });
 
